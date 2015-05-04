@@ -2,19 +2,25 @@ package solutions.mobile.infinitie.incgame;
 
 public class CookieCore {
 
+    // Cookie Goodness, praise cookie
     private double internalCookieCount;
+    private double cookiePerSecond;
+
+    // Clicker related garb
     private int clickerCost = 15;
     private int clickerAmount = 0;
     private double clickerCps = 0;
 
+    // Hold your butts, we are going in
     public CookieCore() {
     }
 
+    // cookie total updater
     public void incrementCookie() {
-
         internalCookieCount += cookiePerSecond;
     }
 
+    // Clicker buy magic
     public void coreBuyClicker() {
         int clickerBaseCost = 15;
         if (internalCookieCount >= clickerCost) {
@@ -26,15 +32,18 @@ public class CookieCore {
         }
     }
 
+    // Will probably end up changed but for now we do it this way
     private void calculateCPS() {
         cookiePerSecond = clickerCps;
     }
 
+    // item cost jesus function
     private int updateCost(int itemBaseCost, int itemAmount) {
         return (int) (itemBaseCost * (Math.pow(1.15, itemAmount)));
 
     }
 
+    // Getters and Setters, fuck you
     public double getInternalCookieCount() {
         return internalCookieCount;
     }
@@ -74,6 +83,4 @@ public class CookieCore {
     public void setCookiePerSecond(double cookiePerSecond) {
         this.cookiePerSecond = cookiePerSecond;
     }
-
-    double cookiePerSecond;
 }
