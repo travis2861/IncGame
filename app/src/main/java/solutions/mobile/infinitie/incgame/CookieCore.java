@@ -1,15 +1,10 @@
 package solutions.mobile.infinitie.incgame;
 
-import android.view.View;
-
-/**
- * Created by tigew on 5/4/15.
- */
 public class CookieCore {
 
     private double internalCookieCount;
-    private double clickerCost = 1;
-    private int clickerCount = 0;
+    private int clickerCost = 15;
+    private int clickerAmount = 0;
     private double clickerCps = 0;
 
     public CookieCore() {
@@ -21,17 +16,23 @@ public class CookieCore {
     }
 
     public void coreBuyClicker() {
+        int clickerBaseCost = 15;
         if (internalCookieCount >= clickerCost) {
-            clickerCount += 1;
+            clickerAmount += 1;
             internalCookieCount -= clickerCost;
-            clickerCost += (clickerCost * 0.03);
-            clickerCps += .3;
+            clickerCost = updateCost(clickerBaseCost, clickerAmount);
+            clickerCps += .1;
             calculateCPS();
         }
     }
 
     private void calculateCPS() {
         cookiePerSecond = clickerCps;
+    }
+
+    private int updateCost(int itemBaseCost, int itemAmount) {
+        return (int) (itemBaseCost * (Math.pow(1.15, itemAmount)));
+
     }
 
     public double getInternalCookieCount() {
@@ -42,20 +43,20 @@ public class CookieCore {
         this.internalCookieCount = internalCookieCount;
     }
 
-    public double getClickerCost() {
+    public int getClickerCost() {
         return clickerCost;
     }
 
-    public void setClickerCost(double clickerCost) {
+    public void setClickerCost(int clickerCost) {
         this.clickerCost = clickerCost;
     }
 
-    public int getClickerCount() {
-        return clickerCount;
+    public int getClickerAmount() {
+        return clickerAmount;
     }
 
-    public void setClickerCount(int clickerCount) {
-        this.clickerCount = clickerCount;
+    public void setClickerAmount(int clickerAmount) {
+        this.clickerAmount = clickerAmount;
     }
 
     public double getClickerCps() {

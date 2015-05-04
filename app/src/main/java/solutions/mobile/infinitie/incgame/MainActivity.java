@@ -62,10 +62,11 @@ public class MainActivity extends ActionBarActivity {
                     @Override
                     public void run() {
                         cpsText.setText(String.format("CPS: %.2f", core.getCookiePerSecond()));
-                        cookieText.setText(String.format("Cookies: %.2f", core.getInternalCookieCount()));
+                        cookieText.setText(String.format("Cookies: %d",
+                                Double.valueOf(core.getInternalCookieCount()).intValue()));
 
-                        clickerAmountText.setText(String.format("Total: %d", core.getClickerCount()));
-                        clickerCostText.setText(String.format("Cost: %.2f", core.getClickerCost()));
+                        clickerAmountText.setText(String.format("Total: %d", core.getClickerAmount()));
+                        clickerCostText.setText(String.format("Cost: %d", core.getClickerCost()));
                     }
                 });
             }
