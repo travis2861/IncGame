@@ -18,6 +18,7 @@ public class MainActivity extends ActionBarActivity {
     TextView clickerCostText;
     TextView clickerAmountText;
     TextView cpsText;
+
     double internalCookieCount;
     double clickerCost = 1;
     int clickerCount = 0;
@@ -47,6 +48,8 @@ public class MainActivity extends ActionBarActivity {
 
     private void gameLoop() {
         Timer t = new Timer();
+
+        // Cookie tick task
         t.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -54,13 +57,27 @@ public class MainActivity extends ActionBarActivity {
                     @Override
                     public void run() {
                         incrementCookie();
-                        cpsText.setText(String.format("CPS: %.2f", cookiePerSecond));
                     }
                 });
             }
         }, 0, 1000);
 
+        // UI update task
+        t.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                MainActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        cpsText.setText(String.format("CPS: %.2f", cookiePerSecond));
+                        cookieText.setText(String.format("Cookies: %.2f", internalCookieCount));
 
+                        clickerAmountText.setText(String.format("Total: %d", clickerCount));
+                        clickerCostText.setText(String.format("Cost: %.2f", clickerCost));
+                    }
+                });
+            }
+        }, 0, 100);
     }
 
     @Override
@@ -88,31 +105,23 @@ public class MainActivity extends ActionBarActivity {
     public void incrementCookie() {
 
         internalCookieCount += cookiePerSecond;
-        //TextViews..cookieText.setText(String.valueOf(internalCookieCount));
-        //cookieText.setText(String.valueOf(internalCookieCount));
-        cookieText.setText(String.format("Cookies: %.2f", internalCookieCount));
     }
 
     public void cookieButtonPressed(View view) {
-        TextView cookieText = (TextView) findViewById(R.id.cookieCount);
-
         internalCookieCount += 1;
-        cookieText.setText(String.format("Cookies: %.2f", internalCookieCount));
     }
 
     public void buyClicker(View view) {
         if (internalCookieCount >= clickerCost) {
             clickerCount += 1;
-            clickerAmountText.setText(String.format("Total: %d", clickerCount));
             internalCookieCount -= clickerCost;
             clickerCost += (clickerCost * 0.03);
-            clickerCostText.setText(String.format("Cost: %.2f", clickerCost));
             clickerCps += .3;
-            calulateCps();
+            calculateCPS();
         }
     }
 
-    private void calulateCps() {
+    private void calculateCPS() {
         cookiePerSecond = clickerCps;
     }
 }
