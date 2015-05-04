@@ -1,5 +1,6 @@
 package solutions.mobile.infinitie.incgame;
 
+// TODO (TRAVIS): Possibly modularize even further into buy, upgrade, achieve class
 public class CookieCore {
 
     // Cookie Goodness, praise cookie
