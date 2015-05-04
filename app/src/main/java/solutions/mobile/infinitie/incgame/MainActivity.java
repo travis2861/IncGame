@@ -13,17 +13,12 @@ import java.util.TimerTask;
 
 public class MainActivity extends ActionBarActivity {
 
+    CookieCore core = new CookieCore();
 
     TextView cookieText;
     TextView clickerCostText;
     TextView clickerAmountText;
     TextView cpsText;
-
-    double internalCookieCount;
-    double clickerCost = 1;
-    int clickerCount = 0;
-    double clickerCps = 0;
-    double cookiePerSecond;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +34,7 @@ public class MainActivity extends ActionBarActivity {
         cpsText = (TextView) findViewById(R.id.cpsText);
 
         clickerCostText = (TextView) findViewById(R.id.clickerCostText);
-        clickerCostText.setText(String.format("Cost: %.2f", clickerCost));
-
         clickerAmountText = (TextView) findViewById(R.id.clickerAmountText);
-        clickerAmountText.setText(String.format("Total: %d", clickerCount));
     }
 
 
@@ -56,7 +48,7 @@ public class MainActivity extends ActionBarActivity {
                 MainActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        incrementCookie();
+                        core.incrementCookie();
                     }
                 });
             }
@@ -69,11 +61,11 @@ public class MainActivity extends ActionBarActivity {
                 MainActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        cpsText.setText(String.format("CPS: %.2f", cookiePerSecond));
-                        cookieText.setText(String.format("Cookies: %.2f", internalCookieCount));
+                        cpsText.setText(String.format("CPS: %.2f", core.getCookiePerSecond()));
+                        cookieText.setText(String.format("Cookies: %.2f", core.getInternalCookieCount()));
 
-                        clickerAmountText.setText(String.format("Total: %d", clickerCount));
-                        clickerCostText.setText(String.format("Cost: %.2f", clickerCost));
+                        clickerAmountText.setText(String.format("Total: %d", core.getClickerCount()));
+                        clickerCostText.setText(String.format("Cost: %.2f", core.getClickerCost()));
                     }
                 });
             }
@@ -102,26 +94,11 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void incrementCookie() {
-
-        internalCookieCount += cookiePerSecond;
-    }
-
     public void cookieButtonPressed(View view) {
-        internalCookieCount += 1;
+        core.setInternalCookieCount(core.getInternalCookieCount() + 1);
     }
 
     public void buyClicker(View view) {
-        if (internalCookieCount >= clickerCost) {
-            clickerCount += 1;
-            internalCookieCount -= clickerCost;
-            clickerCost += (clickerCost * 0.03);
-            clickerCps += .3;
-            calculateCPS();
-        }
-    }
-
-    private void calculateCPS() {
-        cookiePerSecond = clickerCps;
+        core.coreBuyClicker();
     }
 }
