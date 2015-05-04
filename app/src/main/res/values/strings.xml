@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Inc Game</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="cookieCountText">0</string>
+    <string name="cookieButtonString">Cookie</string>
+    <string name="buyClickerButtonText">Buy Clicker</string>
+</resources>
