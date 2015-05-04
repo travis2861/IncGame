@@ -67,4 +67,35 @@
         android:layout_below="@+id/cookieCount"
         android:layout_centerHorizontal="true" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Buy Grandma"
+        android:id="@+id/buyGrandmaButton"
+        android:layout_marginTop="11dp"
+        android:layout_below="@+id/buyClickerButton"
+        android:layout_alignRight="@+id/buyClickerButton"
+        android:layout_alignEnd="@+id/buyClickerButton"
+        android:onClick="buyGrandma"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Small Text"
+        android:id="@+id/grandmaAmountText"
+        android:layout_alignTop="@+id/buyGrandmaButton"
+        android:layout_alignLeft="@+id/clickerCostText"
+        android:layout_alignStart="@+id/clickerCostText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Small Text"
+        android:id="@+id/grandmaCostText"
+        android:layout_below="@+id/grandmaAmountText"
+        android:layout_alignLeft="@+id/grandmaAmountText"
+        android:layout_alignStart="@+id/grandmaAmountText" />
+
 </RelativeLayout>

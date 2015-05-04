@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.TextView;
 
 
+import org.w3c.dom.Text;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -16,9 +18,13 @@ public class MainActivity extends ActionBarActivity {
     CookieCore core = new CookieCore();
 
     TextView cookieText;
+    TextView cpsText;
+
     TextView clickerCostText;
     TextView clickerAmountText;
-    TextView cpsText;
+
+    TextView grandmaCostText;
+    TextView grandmaAmountText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +41,9 @@ public class MainActivity extends ActionBarActivity {
 
         clickerCostText = (TextView) findViewById(R.id.clickerCostText);
         clickerAmountText = (TextView) findViewById(R.id.clickerAmountText);
+
+        grandmaCostText = (TextView) findViewById(R.id.grandmaCostText);
+        grandmaAmountText = (TextView) findViewById(R.id.grandmaAmountText);
     }
 
 
@@ -67,6 +76,9 @@ public class MainActivity extends ActionBarActivity {
 
                         clickerAmountText.setText(String.format("Total: %d", core.getClickerAmount()));
                         clickerCostText.setText(String.format("Cost: %d", core.getClickerCost()));
+
+                        grandmaAmountText.setText(String.format("Total: %d", core.getGrandmaAmount()));
+                        grandmaCostText.setText(String.format("Cost: %d", core.getGrandmaCost()));
                     }
                 });
             }
@@ -101,5 +113,9 @@ public class MainActivity extends ActionBarActivity {
 
     public void buyClicker(View view) {
         core.coreBuyClicker();
+    }
+
+    public void buyGrandma(View view) {
+        core.coreBuyGrandma();
     }
 }

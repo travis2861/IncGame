@@ -11,6 +11,12 @@ public class CookieCore {
     private int clickerAmount = 0;
     private double clickerCps = 0;
 
+
+    // Grandma knows best
+    private int grandmaCost = 100;
+    private int grandmaAmount = 0;
+    private double grandmaCps = 0;
+
     // Hold your butts, we are going in
     public CookieCore() {
     }
@@ -32,9 +38,20 @@ public class CookieCore {
         }
     }
 
+    public void coreBuyGrandma() {
+        int grandmaBaseCost = 100;
+        if (internalCookieCount >= grandmaCost) {
+            grandmaAmount += 1;
+            internalCookieCount -= grandmaCost;
+            grandmaCost = updateCost(grandmaBaseCost, grandmaAmount);
+            grandmaCps += .5;
+            calculateCPS();
+        }
+    }
+
     // Will probably end up changed but for now we do it this way
     private void calculateCPS() {
-        cookiePerSecond = clickerCps;
+        cookiePerSecond = clickerCps + grandmaCps;
     }
 
     // item cost jesus function
@@ -82,5 +99,29 @@ public class CookieCore {
 
     public void setCookiePerSecond(double cookiePerSecond) {
         this.cookiePerSecond = cookiePerSecond;
+    }
+
+    public int getGrandmaCost() {
+        return grandmaCost;
+    }
+
+    public void setGrandmaCost(int grandmaCost) {
+        this.grandmaCost = grandmaCost;
+    }
+
+    public int getGrandmaAmount() {
+        return grandmaAmount;
+    }
+
+    public void setGrandmaAmount(int grandmaAmount) {
+        this.grandmaAmount = grandmaAmount;
+    }
+
+    public double getGrandmaCps() {
+        return grandmaCps;
+    }
+
+    public void setGrandmaCps(double grandmaCps) {
+        this.grandmaCps = grandmaCps;
     }
 }
